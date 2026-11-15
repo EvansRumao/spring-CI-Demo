@@ -35,7 +35,7 @@ jobs:
 
       # 4. building docker image
       - name: Building docker image
-        run: docker build -t ${{secrets.DOCKER_USERNAME}}/${{env.IMAGE_NAME}}:latest
+        run: docker build -t ${{secrets.DOCKER_USERNAME}}/${{env.IMAGE_NAME}}:latest .
 
 
       #5 login to docker hub
@@ -65,6 +65,9 @@ jobs:
            docker rm springboot-app || true
             docker run -d \ --name springboot-app \ --restart unless-stopped \
               -p 8080:8080 \
-              ${{ secrets.DOCKER_USERNAME }}/${{env.IMAGE_NAME}}:latest \docker image prune -f
+              ${{ secrets.DOCKER_USERNAME }}/${{env.IMAGE_NAME}}:latest 
+            
+            
+           docker image prune -f
 
            
